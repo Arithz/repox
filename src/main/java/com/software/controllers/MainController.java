@@ -28,11 +28,6 @@ public class MainController {
 		return "requestsoftware";
 	}	
 	
-	@GetMapping("/softwareregister")
-	public String redirectSoftwareRegisterPage() {
-		return "softwareregister";
-	}
-	
 	@GetMapping("/feedback")
 	public String redirectFeedbackPage() {
 		return "feedback";
@@ -51,5 +46,23 @@ public class MainController {
 		
 //		return "homepage";
 		return "redirect:/requestsoftware";
+	}
+	
+	
+	// ADMIN REDIRECT //
+	@GetMapping("/adminregister")
+	public String redirectAdminRegisterPage(HttpSession session) {
+		return "adminregister";
+	}
+	
+	@GetMapping("/loginAdmin")
+	public String redirectLoginAdminPage(HttpSession session) {
+		session.setAttribute("adminID", null);
+		return "loginAdmin";
+	}
+	
+	@GetMapping("/softwareregister")
+	public String redirectSoftwareRegisterPage() {
+		return "softwareregister";
 	}
 }

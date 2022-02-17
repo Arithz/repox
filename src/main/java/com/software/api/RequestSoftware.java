@@ -57,4 +57,9 @@ public class RequestSoftware {
 	public void setAdminID(int adminID) {
 		this.adminID = adminID;
 	}
+	@Override
+	public String toString() {
+		return "RequestSoftware [reqID=" + reqID + ", reqStatus=" + reqStatus + ", reqDate=" + reqDate + ", reqswName="
+				+ reqswName + ", reqswVersion=" + reqswVersion + ", userID=" + userID + ", adminID=" + adminID + "]";
+	}
 }

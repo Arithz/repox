@@ -18,7 +18,7 @@ public class RequestRowMapper implements RowMapper<RequestSoftware> {
 		req.setReqswName(rs.getString("reqswName"));
 		req.setReqswVersion(rs.getDouble("reqswVersion"));
 		req.setUserID(rs.getInt("userID"));
-		req.setAdminID(rs.getInt("admnID"));
+		req.setAdminID(rs.getInt("adminID"));
 		
 		return req;
 	}
