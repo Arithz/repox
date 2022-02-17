@@ -4,7 +4,7 @@ import java.io.File;
 
 public class Software {
 
-    private String swNum;
+    private String swID;
     private String swName;
     private double swVersion;
     private String swDescription;
