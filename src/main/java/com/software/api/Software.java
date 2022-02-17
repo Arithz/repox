@@ -8,6 +8,6 @@ public class Software {
     private String swName;
     private double swVersion;
     private String swDescription;
-    private File swImages;	
+    private File swFile;	
     private int categoryID;
 }
