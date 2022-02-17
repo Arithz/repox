@@ -1,5 +1,7 @@
 package com.software.controllers;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -34,5 +36,20 @@ public class MainController {
 	@GetMapping("/feedback")
 	public String redirectFeedbackPage() {
 		return "feedback";
+	}
+	
+	@GetMapping("/login")
+	public String redirectLoginPage(HttpSession session) {
+		session.setAttribute("userID", null);
+		return "login";
+	}
+	
+	@GetMapping("/homepage")
+	public String redirectHomePage(HttpSession session) {
+		Object id = session.getAttribute("userID");
+		if(id == null) return "redirect:/login";
+		
+//		return "homepage";
+		return "redirect:/requestsoftware";
 	}
 }
