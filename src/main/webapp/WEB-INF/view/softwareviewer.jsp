@@ -6,100 +6,66 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+	<title>Insert title here</title>
+	<style><%@include file="/WEB-INF/css/main.css"%></style>
 </head>
 
 <style>
-	table {
-		border: 1px solid #ccc;
-		border-collapse: collapse;
-		margin: 0;
-		padding: 0;
-		width: 100%;
-		table-layout: auto;
-	}
-	
-	table caption {
-		font-size: 1.5em;
-		margin: .5em 0 .75em;
-	}
-	
-	table tr {
-		background-color: #f8f8f8;
-		border: 1px solid #ddd;
-		padding: .35em;
-	}
-	
-	table th, table td {
-		padding: .625em;
-		padding-left: 20px;
-		text-align: left;
-		font-family: bahnschrift;
-		font-size: 16px;
-		line-height: 25px;
-	}
-	
-	table th {
-		padding-top: 12px;
-		padding-bottom: 12px;
-		font-size: .85em;
-		letter-spacing: .1em;
-		text-transform: uppercase;
-		background: #3b3b3b;
-		color: white;
+	h2{
 		font-family: bahnschrift !important;
 	}
 	
-	@media screen and (max-width: 600px) {
-	
-		table {
-	        border: 0;
-	    }
-	
-	    table caption {
-	        font-size: 1.3em;
-	    }
-	    
-	    table thead {
-	        border: none;
-	        clip: rect(0 0 0 0);
-	        height: 1px;
-	        margin: -1px;
-	        overflow: hidden;
-	        padding: 0;
-	        position: absolute;
-	        width: 1px;
-	    }
-	    
-	    table tr {
-	        border-bottom: 3px solid #ddd;
-	        display: block;
-	        margin-bottom: .625em;
-	    }
-	    
-	    table td {
-	        border-bottom: 1px solid #ddd;
-	        display: block;
-	        font-size: .8em;
-	        text-align: right !important;
-	        font-family:bahnschrift;
-	    }
-	    
-	    table td::before {
-	        content: attr(data-label);
-	        float: left;
-	        font-weight: bold;
-	        text-transform: uppercase;
-	    }
-	    
-	    table td:last-child {
-	        border-bottom: 0;
-	    }
+	/* Add a black background color to the top navigation */
+	.topnav {
+	  background-color: #333;
+	  overflow: hidden;
 	}
+	
+	/* Style the links inside the navigation bar */
+	.topnav a {
+	  float: left;
+	  color: #f2f2f2;
+	  text-align: center;
+	  padding: 14px 16px;
+	  text-decoration: none;
+	  font-size: 17px;
+	  color: white;
+	  font-family: bahnschrift !important;
+	}
+	
+	.topnav p {
+	  float: right;
+	  color: #f2f2f2;
+	  text-align: center;
+	  margin-right: 20px;
+	  text-decoration: none;
+	  font-size: 17px;
+	  color: white;
+	  font-family: bahnschrift !important;
+	}
+	
+	/* Change the color of links on hover */
+	.topnav a:hover {
+	  background-color: #ddd;
+	  color: black;
+	}
+	
+	/* Add a color to the active/current link */
+	.topnav a.active {
+	  background-color: #04AA6D;
+	  color: white;
+	 }
 </style>
 
 <body>
-	<h2>REQUESTS LIST</h2>
+	<div class="topnav">
+	  <a href="requestsoftware">Request Software</a>
+	  <a href="requestviewer">View Request</a>
+	  <a href="feedback">Feedback</a>
+	  <a href="index" style="color: blue;">Logout</a>
+	  <p>REPO-X</p>
+	</div>
+	<h2>SOFTWARE LIST</h2>
 	<table>
 		<thead>
 			<tr>
@@ -119,13 +85,16 @@
 					<td data-label="Description">${item.swDescription}</td>
 					<td data-label="Category">${item.categoryID}</td>
 					<td data-label="Download Link">
-						<a href="data:application/zip;base64,${files[status.index]}" download = "${item.swName}.zip">Download link</a>
+					<!--  
+						<a href="data:application/image;base64,${files[status.index]}" download = "${item.swName}.png">Download link</a>
+						<a href="<%=request.getContextPath()%>/download/${item.swID}">Go</a>
+					-->
+					<a href="data:application/zip;base64,${files[status.index]}">Download link</a>
 					</td>
 				</tr>
 			</c:forEach>
 		</tbody>
 		
 	</table>
-
 </body>
 </html>

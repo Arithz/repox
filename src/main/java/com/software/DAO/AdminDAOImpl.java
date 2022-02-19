@@ -35,5 +35,13 @@ public class AdminDAOImpl implements AdminDAO {
 		}
 		
 	}
+
+
+	@Override
+	public Admin getAdminByID(int id) {
+		String sql = "Select * from admin where adminID = '"+id+"'";
+		Admin admin = jdbcTemplate.queryForObject(sql, new AdminRowMapper());
+		return admin;
+	}
 	
 }

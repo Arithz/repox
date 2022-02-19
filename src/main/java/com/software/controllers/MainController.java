@@ -4,6 +4,9 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 public class MainController {
@@ -12,10 +15,20 @@ public class MainController {
 	public String redirect() {
 		return "index";
 	}
-	
+
 	@GetMapping("/index")
 	public String redirectIndex() {
 		return "index";
+	}
+	
+	@GetMapping("/userPage")
+	public String redirectUserPage() {
+		return "userPage";
+	}
+	
+	@GetMapping("/adminPage")
+	public String redirectAdminPage() {
+		return "adminPage";
 	}
 		
 	@GetMapping("/userregister")
@@ -28,26 +41,25 @@ public class MainController {
 		return "requestsoftware";
 	}	
 	
-	@GetMapping("/feedback")
-	public String redirectFeedbackPage() {
-		return "feedback";
-	}
-	
 	@GetMapping("/login")
 	public String redirectLoginPage(HttpSession session) {
 		session.setAttribute("userID", null);
 		return "login";
 	}
 	
-	@GetMapping("/homepage")
+	@GetMapping("/userhomepage")
 	public String redirectHomePage(HttpSession session) {
 		Object id = session.getAttribute("userID");
 		if(id == null) return "redirect:/login";
 		
-//		return "homepage";
-		return "redirect:/requestsoftware";
+		//return "userhomepage";
+		return "redirect:/softwareviewer";
 	}
 	
+	@GetMapping("/categoryregister")
+	public String redirectCategoryRegisterPage() {
+		return "categoryregister";
+	}
 	
 	// ADMIN REDIRECT //
 	@GetMapping("/adminregister")
@@ -61,8 +73,13 @@ public class MainController {
 		return "loginAdmin";
 	}
 	
-	@GetMapping("/softwareregister")
-	public String redirectSoftwareRegisterPage() {
+	@GetMapping("/saveSoftware")
+	public String redirectSaveSoftwarePage() {
 		return "softwareregister";
+	}
+	
+	@GetMapping("/softwareEdit")
+	public String redirectSoftwareEditPage() {
+		return "softwareEdit";
 	}
 }

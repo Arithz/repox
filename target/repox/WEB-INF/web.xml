@@ -1,7 +1,26 @@
-<!DOCTYPE web-app PUBLIC
- "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
- "http://java.sun.com/dtd/web-app_2_3.dtd" >
-
+<web-app id="WebApp_ID" version="2.4"
+    xmlns="<a class="vglnk" href="http://java.sun.com/xml/ns/j2ee" rel="nofollow"><span>http</span><span>://</span><span>java</span><span>.</span><span>sun</span><span>.</span><span>com</span><span>/</span><span>xml</span><span>/</span><span>ns</span><span>/</span><span>j2ee</span></a>"
+    xmlns:xsi="<a class="vglnk" href="http://www.w3.org/2001/XMLSchema-instance" rel="nofollow"><span>http</span><span>://</span><span>www</span><span>.</span><span>w3</span><span>.</span><span>org</span><span>/</span><span>2001</span><span>/</span><span>XMLSchema</span><span>-</span><span>instance</span></a>"
+    xsi:schemaLocation="<a class="vglnk" href="http://java.sun.com/xml/ns/j2ee" rel="nofollow"><span>http</span><span>://</span><span>java</span><span>.</span><span>sun</span><span>.</span><span>com</span><span>/</span><span>xml</span><span>/</span><span>ns</span><span>/</span><span>j2ee</span></a>
+                <a class="vglnk" href="http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd" rel="nofollow"><span>http</span><span>://</span><span>java</span><span>.</span><span>sun</span><span>.</span><span>com</span><span>/</span><span>xml</span><span>/</span><span>ns</span><span>/</span><span>j2ee</span><span>/</span><span>web</span><span>-</span><span>app</span><span>_</span><span>2</span><span>_</span><span>4</span><span>.</span><span>xsd</span></a>">
+ 
 <web-app>
-  <display-name>Archetype Created Web Application</display-name>
+	<display-name>Archetype Created Web Application</display-name>
+
+	<servlet>
+		<servlet-name>dispatcher</servlet-name>
+		<servlet-class>
+			org.springframework.web.servlet.DispatcherServlet
+		</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>/WEB-INF/spring-servlet.xml</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>dispatcher</servlet-name>
+		<url-pattern>/</url-pattern>
+	</servlet-mapping>
 </web-app>

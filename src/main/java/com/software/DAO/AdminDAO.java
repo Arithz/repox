@@ -6,5 +6,5 @@ public interface AdminDAO {
 	public int saveAdmin(Admin admin);
 	
 	public Admin loginAdmin(Admin admin);
-	
+	public Admin getAdminByID(int id);
 }

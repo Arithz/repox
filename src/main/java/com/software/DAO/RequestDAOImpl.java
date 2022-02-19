@@ -7,13 +7,18 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.software.api.RequestSoftware;
+import com.software.api.User;
+import com.software.config.MainAppConfig;
 import com.software.rowmapper.RequestRowMapper;
+import com.software.rowmapper.UserRowMapper;
 
 @Repository
 public class RequestDAOImpl implements RequestDAO {
 		
+	MainAppConfig mac = new MainAppConfig();
+	
 	@Autowired
-	private JdbcTemplate jdbcTemplate;
+	private JdbcTemplate jdbcTemplate = new JdbcTemplate(mac.dataSource());
 
 	@Override
 	public int saveRequest(RequestSoftware req, String userID) {
@@ -27,6 +32,32 @@ public class RequestDAOImpl implements RequestDAO {
 		String sql = "SELECT * from software_request WHERE userID = '"+Integer.parseInt(userID)+"'";
 		List<RequestSoftware> listrequests = jdbcTemplate.query(sql, new RequestRowMapper());
 		return listrequests;
+	}
+
+	@Override
+	public List<RequestSoftware> loadAdminRequests() {
+		String sql = "SELECT * from software_request where reqStatus = 'Pending'";
+		List<RequestSoftware> listrequests = jdbcTemplate.query(sql, new RequestRowMapper());
+		return listrequests;
+	}
+
+	@Override
+	public RequestSoftware getRequestByID(int id) {
+		String sql = "SELECT * from software_request WHERE reqID = '"+id+"'";
+		RequestSoftware req = jdbcTemplate.queryForObject(sql, new RequestRowMapper());
+		return req;
+	}
+
+	@Override
+	public int acceptRequest(int id) {
+		String sql = "UPDATE software_request SET reqStatus = 'Accepted' where reqID = ?";
+		return jdbcTemplate.update(sql, id);
+	}
+
+	@Override
+	public int rejectRequest(int id) {
+		String sql = "UPDATE software_request SET reqStatus = 'Rejected' where reqID = ?";
+		return jdbcTemplate.update(sql, id);
 	}
 
 }

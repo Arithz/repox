@@ -3,9 +3,8 @@ package com.software.api;
 public class Feedback {
 
     private int feedbackID;
-    private int swNum;
     private int userID;
-    private String summary;
+    private String feedbackDetails;
     
 	public int getFeedbackID() {
 		return feedbackID;
@@ -13,27 +12,21 @@ public class Feedback {
 	public void setFeedbackID(int feedbackID) {
 		this.feedbackID = feedbackID;
 	}
-	public int getSwNum() {
-		return swNum;
-	}
-	public void setSwNum(int swNum) {
-		this.swNum = swNum;
-	}
 	public int getUserID() {
 		return userID;
 	}
 	public void setUserID(int userID) {
 		this.userID = userID;
 	}
-	public String getSummary() {
-		return summary;
+	public String getfeedbackDetails() {
+		return feedbackDetails;
 	}
-	public void setSummary(String summary) {
-		this.summary = summary;
+	public void setfeedbackDetails(String feedbackDetails) {
+		this.feedbackDetails = feedbackDetails;
 	}
 	@Override
 	public String toString() {
-		return "Feedback [feedbackID=" + feedbackID + ", swNum=" + swNum + ", userID=" + userID + ", summary=" + summary
+		return "Feedback [feedbackID=" + feedbackID + ", userID=" + userID + ", feedbackDetails=" + feedbackDetails
 				+ "]";
 	}
     

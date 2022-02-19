@@ -1,5 +1,7 @@
 package com.software.config;
 
+import java.nio.charset.StandardCharsets;
+
 import javax.sql.DataSource;
 
 import org.springframework.context.annotation.Bean;
@@ -7,6 +9,8 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
+import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
@@ -22,6 +26,20 @@ public class MainAppConfig {
 		viewResolver.setSuffix(".jsp");
 		
 		return viewResolver;
+	}
+	
+	public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
+		configurer.enable();
+	}
+	
+	@Bean(name = "multipartResolver")
+	public CommonsMultipartResolver commonsmultipartResolver() {
+	    CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver();
+	    multipartResolver.setDefaultEncoding(StandardCharsets.UTF_8.displayName());
+	    multipartResolver.setMaxUploadSize(5000000);
+	    multipartResolver.setMaxUploadSizePerFile(5242880);//5MB
+	    multipartResolver.setMaxInMemorySize(1048576);
+	    return multipartResolver;
 	}
 	
 	@Bean
@@ -40,5 +58,6 @@ public class MainAppConfig {
 		
 		return dataSource;
 	}
+
 }
 

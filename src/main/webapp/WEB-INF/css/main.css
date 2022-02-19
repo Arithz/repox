@@ -1,0 +1,196 @@
+@charset "ISO-8859-1";
+
+/* form styles */
+* {
+	box-sizing: border-box;
+}
+
+.form-container h1 {
+	margin-top: 50px;
+	margin-bottom: 40px;
+}
+
+.form-container button {
+	margin-top: 20px;
+}
+
+form {
+	margin: 0;
+	font-family: "Nunito", sans-serif;
+	background-color: #fff;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	padding: 0 30px 20px 30px;
+	height: 100%;
+	text-align: center;
+}
+
+input, select, textarea {
+	background-color: #eee;
+	border: none;
+	padding: 12px 15px;
+	margin: 8px 0;
+	width: 100%;
+	font-family: inherit;
+}
+
+.container {
+	margin: auto;
+	background-color: #fff;
+	border-radius: 10px;
+	box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px
+		rgba(0, 0, 0, 0.22);
+	height: min-content;
+	width: 480px;
+	max-width: 100%;
+	padding: 20px 10px;
+}
+
+.form-container {
+	top: 0;
+	width: 100%;
+	transition: all 0.6s ease-in-out;
+}
+
+#btnsubmit {
+	background-color: #a3a3a3;
+	transition: 0.1s ease-in-out;
+	border-radius: 2px;
+	cursor: pointer;
+}
+
+#btnsubmit:hover {
+	background-color: #636363;
+	color: white;
+}
+
+#lectnum, #coursecode {
+	display: none;
+}
+
+/* end of form styles */
+
+/* table styles */
+table {
+	border: 1px solid #ccc;
+	border-collapse: collapse;
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	table-layout: auto;
+}
+
+table caption {
+	font-size: 1.5em;
+	margin: .5em 0 .75em;
+}
+
+table tr {
+	background-color: #f8f8f8;
+	border: 1px solid #ddd;
+	padding: .35em;
+}
+
+table th, table td {
+	padding: .625em;
+	padding-left: 20px;
+	text-align: left;
+	font-family: bahnschrift;
+	font-size: 16px;
+	line-height: 25px;
+}
+
+table th {
+	padding-top: 12px;
+	padding-bottom: 12px;
+	font-size: .85em;
+	letter-spacing: .1em;
+	text-transform: uppercase;
+	background: #3b3b3b;
+	color: white;
+	font-family: bahnschrift !important;
+}
+
+@media screen and (max-width: 600px) {
+	table {
+		border: 0;
+	}
+	table caption {
+		font-size: 1.3em;
+	}
+	table thead {
+		border: none;
+		clip: rect(0, 0, 0, 0);
+		height: 1px;
+		margin: -1px;
+		overflow: hidden;
+		padding: 0;
+		position: absolute;
+		width: 1px;
+	}
+	table tr {
+		border-bottom: 3px solid #ddd;
+		display: block;
+		margin-bottom: .625em;
+	}
+	table td {
+		border-bottom: 1px solid #ddd;
+		display: block;
+		font-size: .8em;
+		text-align: right !important;
+		font-family: bahnschrift;
+	}
+	table td::before {
+		content: attr(data-label);
+		float: left;
+		font-weight: bold;
+		text-transform: uppercase;
+	}
+	table td:last-child {
+		border-bottom: 0;
+	}
+}
+
+/* end of table styles */
+
+/* feedback styles */
+.feedback-container {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
+}
+
+.feedback {
+	background-color: white;
+	padding: 20px 30px;
+	box-shadow: 0 3px 10px rgba(199, 199, 199, 0.2);
+	border-radius: 5px;
+	text-align: center;
+	margin: 10px 20px;
+}
+
+.header {
+	font-size: 20px;
+	font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
+		sans-serif;
+	margin: 10px;
+}
+
+.createfeedback {
+	background-color: white;
+	padding: 20px 30px;
+	box-shadow: 0 3px 10px rgba(199, 199, 199, 0.2);
+	border-radius: 5px;
+	text-align: center;
+	margin: 10px 20px;
+	text-align: center;
+}
+
+.createfeedback textarea {
+	background-color: white;
+	width: 60%;
+	min-height: 90%;
+	max-height: 150%;
+}
+/* end of feedback styles */

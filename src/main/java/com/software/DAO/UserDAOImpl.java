@@ -7,16 +7,21 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.software.api.User;
+import com.software.config.MainAppConfig;
 import com.software.rowmapper.UserRowMapper;
 
 @Repository
 public class UserDAOImpl implements UserDAO {
+	
+	MainAppConfig mac = new MainAppConfig();
 		
 	@Autowired
-	private JdbcTemplate jdbcTemplate;
-
+	private JdbcTemplate jdbcTemplate = new JdbcTemplate(mac.dataSource());
+	
 	@Override
 	public int saveUser(User user) {
+		if(loginUser(user) == user) { System.out.println("exist"); return 0; }
+		
 		String sql = "INSERT INTO user (userID, userName, userPassword, userEmail, userCategory) values ('"+user.getUserID()+"','"+user.getUserName()+"','"+user.getUserPassword()+"','"+user.getUserEmail()+"','"+user.getUserCategory()+"')";
 		return jdbcTemplate.update(sql);
 	}
@@ -32,6 +37,7 @@ public class UserDAOImpl implements UserDAO {
 		
 		return jdbcTemplate.update(sql);
 	}
+	
 
 	@Override
 	public User loginUser(User user) {
@@ -46,4 +52,10 @@ public class UserDAOImpl implements UserDAO {
 		
 	}
 
+	@Override
+	public User getUserByID(int id) {
+		String sql = "Select * from user where userID = '"+id+"'";
+		User user = jdbcTemplate.queryForObject(sql, new UserRowMapper());
+		return user;
+	}
 }

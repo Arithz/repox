@@ -22,12 +22,16 @@ public class UserController {
 	//register new user function
 	@RequestMapping(value = "/saveUser", method = RequestMethod.POST)
 	public String userRegister(@ModelAttribute("user") User user, @RequestParam("lecturernum") String lectnum, @RequestParam("coursecode") String coursecode) {
-		UserDAO.saveUser(user);
+		int result = UserDAO.saveUser(user);
+		
+		if (result == 0) return "redirect:/userregister";
+		
 		if(user.getUserCategory().equals("Lecturer")) {
 			UserDAO.saveUserCategory(user, lectnum);
 		}else {
 			UserDAO.saveUserCategory(user, coursecode);
 		}
+		
 		return "redirect:/index";
 	}
 	
@@ -37,7 +41,7 @@ public class UserController {
 		User logineduser = UserDAO.loginUser(user);
 		if(logineduser != null) {
 			session.setAttribute("userID",logineduser.getUserID());
-			return "redirect:/homepage";
+			return "redirect:/userhomepage";
 		}else {
 			return "redirect:/login";
 		}

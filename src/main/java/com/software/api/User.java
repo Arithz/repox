@@ -38,4 +38,11 @@ public class User {
 	public void setUserCategory(String userCategory) {
 		this.userCategory = userCategory;
 	}
+	
+	@Override
+	public String toString() {
+		return "User [userID=" + userID + ", userName=" + userName + ", userPassword=" + userPassword + ", userEmail="
+				+ userEmail + ", userCategory=" + userCategory + "]";
+	}
+	
 }

@@ -6,6 +6,7 @@ public interface UserDAO {
 	public int saveUser(User user);
 	public int saveUserCategory(User user, String value);
 	
+	User getUserByID(int id);
 	public User loginUser(User user);
 	
 }
