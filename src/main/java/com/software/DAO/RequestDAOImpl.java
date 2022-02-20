@@ -33,6 +33,13 @@ public class RequestDAOImpl implements RequestDAO {
 		List<RequestSoftware> listrequests = jdbcTemplate.query(sql, new RequestRowMapper());
 		return listrequests;
 	}
+	
+	@Override
+	public List<RequestSoftware> loadAllRequests() {
+		String sql = "SELECT * from software_request";
+		List<RequestSoftware> listrequests = jdbcTemplate.query(sql, new RequestRowMapper());
+		return listrequests;
+	}
 
 	@Override
 	public List<RequestSoftware> loadAdminRequests() {
@@ -49,9 +56,9 @@ public class RequestDAOImpl implements RequestDAO {
 	}
 
 	@Override
-	public int acceptRequest(int id) {
-		String sql = "UPDATE software_request SET reqStatus = 'Accepted' where reqID = ?";
-		return jdbcTemplate.update(sql, id);
+	public int acceptRequest(int id, int adminID) {
+		String sql = "UPDATE software_request SET reqStatus = 'Accepted', adminID = ? where reqID = ?";
+		return jdbcTemplate.update(sql, adminID, id);
 	}
 
 	@Override

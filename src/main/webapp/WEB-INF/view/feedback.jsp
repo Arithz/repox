@@ -10,7 +10,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Document</title>
 
-<style><%@include file ="/WEB-INF/css/main.css"%></style>
+	<style><%@include file="/WEB-INF/css/main.css"%></style>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 </head>
 
 <style>
@@ -29,11 +30,17 @@ textarea {
 }
 </style>
 
+<!--Navigation bar-->
+<div id="nav-placeholder">
+	<%@include file="header.jsp" %>
+</div>
+<input type = "hidden" id = "active" data-active = "feedback"/>
+
 <body>
 
 	<div class="createfeedback">
 		<form method="POST" action="saveFeedback">
-			<textarea rows="3">Write your feedback for the system...</textarea>
+			<textarea name = "feedbackDetails" rows="3">Write your feedback for the system...</textarea>
 			<input type = "submit" id = "btnsubmit">
 		</form>
 	</div>

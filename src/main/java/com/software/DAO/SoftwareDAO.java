@@ -12,5 +12,5 @@ public interface SoftwareDAO {
 	public int delete(Software software);
 	List<Software> loadSoftwares();
 	List<Software> checkSwAvailabletoDelete(int swID);
-	
+	public List<Object> getSoftwareHistory();
 }

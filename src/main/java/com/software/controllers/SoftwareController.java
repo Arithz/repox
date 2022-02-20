@@ -26,9 +26,12 @@ import com.software.DAO.RequestDAO;
 import com.software.DAO.RequestDAOImpl;
 import com.software.DAO.SoftwareDAO;
 import com.software.DAO.SoftwareDAOImpl;
+import com.software.DAO.UserDAO;
+import com.software.DAO.UserDAOImpl;
 import com.software.api.Category;
 import com.software.api.RequestSoftware;
 import com.software.api.Software;
+import com.software.api.User;
 
 @Controller
 public class SoftwareController {
@@ -37,7 +40,15 @@ public class SoftwareController {
 	private SoftwareDAO softwareDAO = new SoftwareDAOImpl();
 	private CategoryDAO categoryDAO = new CategoryDAOImpl();
 	private RequestDAO requestDAO = new RequestDAOImpl();
-
+	private UserDAO userDAO = new UserDAOImpl();
+	
+	//register software form
+	@GetMapping("/adminsoftwareregister")
+	public String redirectSoftwareRegisterPage(Model model) {
+		List<Category> listcategory = categoryDAO.loadCategory();
+		model.addAttribute("categories",listcategory);
+		return "adminsoftwareregister";
+	}
 	
 	// DOWNLOAD CONTROL //
 	@RequestMapping(value = "download/{swid}", method = RequestMethod.GET)
@@ -49,7 +60,7 @@ public class SoftwareController {
 	
 	//submit form to save the software
 	@RequestMapping(value = "/saveSoftware", method = RequestMethod.POST)
-	public String userRegister(@RequestParam("reqID") int reqID, @RequestParam("swName") String swName, @RequestParam("swVersion") double swVersion, @RequestParam("swDescription") String swDescription, @RequestParam("categoryID") int categoryID, @RequestParam("swFile") MultipartFile file) throws IOException {
+	public String userRegister(@RequestParam(value = "reqID", required = false) Integer reqID, @RequestParam("swName") String swName, @RequestParam("swVersion") double swVersion, @RequestParam("swDescription") String swDescription, @RequestParam("categoryID") int categoryID, @RequestParam("swFile") MultipartFile file, HttpSession session) throws IOException {
 		Software software = new Software();
 		software.setSwName(swName);
 		software.setSwVersion(swVersion);
@@ -61,23 +72,16 @@ public class SoftwareController {
 			result = hex(file.getBytes());
 			softwareDAO.saveSoftware(software, result);
 			
-			if(reqID != 0) {
-				requestDAO.acceptRequest(reqID);
+			if(reqID != null) {
+				Object adminid = session.getAttribute("adminID");
+				if(adminid != null) requestDAO.acceptRequest(reqID, Integer.parseInt(adminid.toString()));
 			}
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
 
-		return "redirect:/softwareregister";
+		return "redirect:/adminsoftwareregister";
 	}
-	
-//    public static String base64ToHex(String value) throws UnsupportedEncodingException {
-//        String hexValue = null;
-//        if (value != null) {
-//            hexValue = new String(Hex.encodeHex(Base64.getDecoder().decode(value.getBytes("UTF-8"))));
-//        }
-//        return hexValue;
-//    }
 	
 	public static String hex(byte[] bytes) {
         StringBuilder result = new StringBuilder();
@@ -88,40 +92,13 @@ public class SoftwareController {
         }
         return result.toString();
     }
-	
-	//register software form
-	@GetMapping("/softwareregister")
-	public String redirectSoftwareRegisterPage(Model model) {
-		List<Category> listcategory = categoryDAO.loadCategory();
-		model.addAttribute("categories",listcategory);
-		return "softwareregister";
-	}
-	
+
 	//register software from request pending
 	@RequestMapping(value = "sofwareregister/{reqID}", method = RequestMethod.GET)
 	public String registersoftwarefromrequest(@PathVariable("reqID") int reqID, RedirectAttributes redirectAttributes) {
 		RequestSoftware req = requestDAO.getRequestByID(reqID);
 		redirectAttributes.addFlashAttribute("request", req);
-		return "redirect:/softwareregister";
-	}
-	
-	//get list of all softwares
-	@GetMapping("/softwareviewer")
-	public String redirectRequestViewerPage(Model model, HttpSession session) throws IOException {
-		List<Software> softwares = softwareDAO.loadSoftwares();
-		
-		List<String> files = new ArrayList<String>();
-		
-		for(int i =0; i < softwares.size(); i++) {
-			byte[] encodeBase64 = Base64.getEncoder().encode(softwares.get(i).getSwFile());
-			String base64DataString = new String(encodeBase64 , "UTF-8");
-			files.add(base64DataString);
-		}
-	
-		model.addAttribute("softwares",softwares);
-		model.addAttribute("files", files);
-		
-		return "softwareviewer";
+		return "redirect:/adminsoftwareregister";
 	}
 	
 	//get all softwares of the admins
@@ -171,5 +148,12 @@ public class SoftwareController {
 			redirectAttributes.addFlashAttribute("alert", alert);
 			return "redirect:/adminswlist";
 		}
+	}
+	
+	@GetMapping("/adminsoftwareanalysis")
+	public String getSoftwareAnalysis(Model model) {
+		List<Object> histories = softwareDAO.getSoftwareHistory();
+		model.addAttribute("histories", histories);
+		return "adminsoftwareanalysis";
 	}
 }

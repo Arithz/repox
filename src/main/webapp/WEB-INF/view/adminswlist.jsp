@@ -5,13 +5,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
-<title>Repo-X</title>
-<style><%@include file="/WEB-INF/css/admin.css"%></style>
+	<meta charset="UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Repo-X</title>
+	<style><%@include file ="/WEB-INF/css/admin.css"%></style>
+	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 </head>
-
-<style>
-</style>
 
 <script>
 	function deletealert(swID) {
@@ -20,11 +21,20 @@
 		}
 	}
 </script>
+
+<!--Navigation bar-->
+<div id="nav-placeholder">
+	<%@include file="adminheader.jsp" %>
+</div>
+
+<input type = "hidden" id = "active" data-active = "adminswlist"/>
+
 <body>
+<div id = "bodycontent">
+	<h2 align = "center">SOFTWARE LIST</h2>
 	<c:if test="${not empty alert}">
 		${alert}
 	</c:if>
-	<h1>Software List</h1>
 	<br>
 	<table width="100%" cellpadding="10">
 		<tr>
@@ -53,9 +63,11 @@
 	</table>
 
 	<br />
-	<a href="#"><button
-			style="width: 140px; margin-left: 45%; margin-top: 20px;">Add
-			New Book</button></a>
-	<a href="#"><button class="btn">Logout</button></a>
+	<div class = "row" style = "display:flex; gap:10px; margin-top:10px; justify-content:center">
+		<a href="adminsoftwareregister"><button style="width: 140px;">Add Software</button></a>
+		<a href="adminsoftwareanalysis"><button style="width: 140px;">Software Analysis</button></a>
+	</div>
+
+</div>
 </body>
 </html>

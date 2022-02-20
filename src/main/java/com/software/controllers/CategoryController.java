@@ -21,6 +21,6 @@ public class CategoryController {
 	@RequestMapping(value = "/saveCat", method = RequestMethod.POST)
 	public String categoryRegister(@ModelAttribute("category") Category category) {
 		CategoryDAO.saveCat(category);
-		return "redirect:/softwareregister";
+		return "redirect:/adminsoftwareregister";
 	}
 }

@@ -14,6 +14,7 @@ import com.software.api.Admin;
 
 @Controller
 public class AdminController {
+	
 	@Autowired
 	private AdminDAO AdminDAO = new AdminDAOImpl();
 
@@ -25,17 +26,14 @@ public class AdminController {
 	}
 	
 	//login admin function
-	
 	@RequestMapping(value = "/loginAdmin", method = RequestMethod.POST)
 	public String adminLogin(@ModelAttribute("admin") Admin admin, HttpSession session) {
 		Admin loginedadmin = AdminDAO.loginAdmin(admin);
-		System.out.println(loginedadmin);
 		if(loginedadmin != null) {
 			session.setAttribute("adminID",loginedadmin.getAdminID());
-			return "redirect:/softwareregister";
+			return "redirect:/adminswlist";
 		}else {
 			return "redirect:/loginAdmin";
 		}
-		
 	}
 }

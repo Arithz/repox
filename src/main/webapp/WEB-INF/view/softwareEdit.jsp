@@ -2,11 +2,21 @@
 	pageEncoding="ISO-8859-1" isELIgnored="false"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <html>
-<title>Update Book</title>
+<title>Repo-X</title>
+<style><%@include file="/WEB-INF/css/main.css"%></style>
+<style><%@include file="/WEB-INF/css/header.css"%></style>
 <body>
-    <div class="form">
-	<h1>Update Book</h1>
+   <div class="topnav">
+	<div class="topnav">
+	  <a href="adminswlist">Back</a>
+	  <p>REPO-X</p>
+	</div>
+	</div>
+	<br><br>
+   <div class="container" id="container">
+      <div class="form-container sign-up-container">
 	<form method="POST" name="update" action="updatesw">
+	<h1>Update Software</h1>
 		<table>
 			<input name="swID" type = "hidden" value="${softwares.swID}"/> 
 			<tr>
@@ -28,44 +38,14 @@
 		</table>
 	</form>
 	</div>
+	</div>
 </body>
 
-<style>
-
-	body{
-	   background-size: cover;
-    	height: 100vh;
-    	font-size: 15px;
-   		font-family: 'Roboto', sans-serif;
+<style>	
+	.container {
+		width:600px;
+		
 	}
-	
-	h1{
-	    color: black;
-	    font-size: 30px;
-		font-weight: normal;
-	}
-
-	.form{
-		position: absolute;
-		top: 45%;
-		transform: translate(0, -50%);
-		width: 500px;  
-		overflow: hidden;  
-		margin: auto;  
-		margin: 20 0 0 450px;  
-		padding: 30px;  
-		background: #A1867F;  
-		border-radius: 15px;
-		color: black;
-		opacity: 0.9;
-		 
-	}
-	
-	input{
-		width: 300px;
-		padding: 10px;
-	}
-	
 	.button{
 		text-align: center;
 		width: 100px;

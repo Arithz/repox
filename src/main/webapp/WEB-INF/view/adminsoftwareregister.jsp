@@ -4,15 +4,24 @@
 
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    
-    <style><%@include file="/WEB-INF/css/main.css"%></style>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-  </head>
+  <script>
+  $(document).ready(function(){
+	  $('#image-file').on('change', function() {
+		  console.log('This file size is: ' + this.files[0].size / 1024 + "KiB");
+		});
+  });
+  </script>
+
+<head>
+	<meta charset="UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Repo-X</title>
+	<style><%@include file ="/WEB-INF/css/main.css"%></style>
+	<style><%@include file ="/WEB-INF/css/admin.css"%></style>
+	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+</head>
 
   <style>
     #btncat {
@@ -42,16 +51,13 @@
     }
   </style>
   
-  <script>
-  $(document).ready(function(){
-	  $('#image-file').on('change', function() {
-		  console.log('This file size is: ' + this.files[0].size / 1024 + "KiB");
-		});
-  });
-  </script>
+  <!--Navigation bar-->
+<div id="nav-placeholder">
+	<%@include file="adminheader.jsp" %>
+</div>
 
-  <body>
- 	
+  <body style="background-color:rgb(238, 238, 238);">
+ 	<div id = "bodycontent">
     <div class="container" id="container">
       <div class="form-container sign-up-container">
 		<form method="post" action="saveSoftware" enctype="multipart/form-data">
@@ -72,12 +78,13 @@
 					<c:forEach items="${categories}" var="item">
 						<option value="${item.categoryID}">${item.categoryName}</option>
 					</c:forEach>
-				</select> <a id="btncat" href="category">New Category</a>
+				</select> <a id="btncat" href="categoryregister">New Category</a>
 			</div>
 			<input id = "image-file" type = "file" name = "swFile" required/>
 			<input id="btnsubmit" type="submit" value="Sign Up" />
 		</form>
       </div>
+    </div>
     </div>
   </body>
 </html>

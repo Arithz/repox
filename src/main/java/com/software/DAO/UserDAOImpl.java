@@ -38,6 +38,17 @@ public class UserDAOImpl implements UserDAO {
 		return jdbcTemplate.update(sql);
 	}
 	
+	@Override
+	public Boolean checkUserCategory(int id) {
+		String sql = "select * from user where userID = '"+id+"' AND userCategory = 'Lecturer'";
+		List<User> usercheck = jdbcTemplate.query(sql, new UserRowMapper());
+		if(usercheck.size() == 1) {
+			return true;
+		}else {
+			return false;
+		}
+	}
+	
 
 	@Override
 	public User loginUser(User user) {

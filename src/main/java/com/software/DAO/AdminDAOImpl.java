@@ -26,14 +26,11 @@ public class AdminDAOImpl implements AdminDAO {
 		String sql = "SELECT * FROM admin WHERE adminID ='"+admin.getAdminID()+"' AND adminPassword='"+admin.getAdminPassword()+"'";
 		List<Admin> admincheck = jdbcTemplate.query(sql, new AdminRowMapper());
 		
-		System.out.println(admincheck.size());
 		if(admincheck.size() == 1) {
-			System.out.println(admin);
 			return admin;
 		}else {
 			return null;
 		}
-		
 	}
 
 

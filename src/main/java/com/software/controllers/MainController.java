@@ -12,13 +12,22 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class MainController {
 	
 	@GetMapping("/")
-	public String redirect() {
+	public String redirect(HttpSession session) {
+		session.setAttribute("userID", null);
+		session.setAttribute("adminID", null);
 		return "index";
 	}
 
 	@GetMapping("/index")
-	public String redirectIndex() {
+	public String redirectIndex(HttpSession session) {
+		session.setAttribute("userID", null);
+		session.setAttribute("adminID", null);
 		return "index";
+	}
+	
+	@GetMapping("/adminheader")
+	public String getNavBar() {
+		return "adminheader";
 	}
 	
 	@GetMapping("/userPage")
@@ -36,24 +45,19 @@ public class MainController {
 		return "userregister";
 	}
 	
-	@GetMapping("/requestsoftware")
-	public String redirectRequestSoftwarePage() {
-		return "requestsoftware";
-	}	
-	
 	@GetMapping("/login")
 	public String redirectLoginPage(HttpSession session) {
 		session.setAttribute("userID", null);
 		return "login";
 	}
 	
-	@GetMapping("/userhomepage")
-	public String redirectHomePage(HttpSession session) {
+	//get list of all softwares
+	@GetMapping("/softwareviewer")
+	public String redirectRequestViewerPage(HttpSession session){	
 		Object id = session.getAttribute("userID");
 		if(id == null) return "redirect:/login";
 		
-		//return "userhomepage";
-		return "redirect:/softwareviewer";
+		return "softwareviewer";
 	}
 	
 	@GetMapping("/categoryregister")
@@ -67,7 +71,7 @@ public class MainController {
 		return "adminregister";
 	}
 	
-	@GetMapping("/loginAdmin")
+	@GetMapping("/admin")
 	public String redirectLoginAdminPage(HttpSession session) {
 		session.setAttribute("adminID", null);
 		return "loginAdmin";
@@ -75,7 +79,7 @@ public class MainController {
 	
 	@GetMapping("/saveSoftware")
 	public String redirectSaveSoftwarePage() {
-		return "softwareregister";
+		return "adminsoftwareregister";
 	}
 	
 	@GetMapping("/softwareEdit")

@@ -1,7 +1,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Homepage</title>
+<title>Repo-X</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
@@ -10,7 +10,7 @@
     </div>
 	<div class="middle">
 		<a href="login"><button class="btn" style="margin:60px;"><i class="fa fa-user" aria-hidden="true"></i>User</button></a>
-		<a href="adminPage"><button class="btn" style="margin:60px;"><i class="fa fa-user-plus" aria-hidden="true"></i>Admin</button></a>
+		<a href="admin"><button class="btn" style="margin:60px;"><i class="fa fa-user-plus" aria-hidden="true"></i>Admin</button></a>
 	</div>
 </body>
 <style>
@@ -25,7 +25,7 @@
 }
 
 body{
-	background-color: #D8AA96;
+	background-color:rgb(238, 238, 238);
     background-size: cover;
     height: 100vh;
     font-size: 16px;
@@ -102,7 +102,7 @@ header img{
 }
 
 .btn{
-    background: white;
+    background: #ADB5BD;
     border: 0;
     border-radius: 10px;
     padding: 30px 80px;
@@ -117,7 +117,7 @@ header img{
 }
 
 .btn:hover{
-    background: black;
+    background: #212529;
     color: white;
 }
 

@@ -40,16 +40,32 @@ public class FeedbackController {
 		
 		model.addAttribute("listfeedback", listfeedback);
 		model.addAttribute("listusername", listusername);
-		return "feedback";
+		return "feedback";	
 	}
 	
 	
 	//register new feedback function
 	@RequestMapping(value = "/saveFeedback", method = RequestMethod.POST)
-	public String userRegister(@ModelAttribute("feedback") Feedback fb, HttpSession session) {
+	public String userRegister(@ModelAttribute("feedback") Feedback fb, HttpSession session) {	
 		fbDAO.saveFeedback(fb, session.getAttribute("userID").toString());
-		
 		return "redirect:/feedback";
+	}
+	
+	
+	//admin page for feedback
+	@GetMapping("/adminfeedback")
+	public String redirectAdminFeedbackPage(Model model, HttpSession session) {
+		List<Feedback> listfeedback = fbDAO.loadFeedbacks();
+		List<String> listusername = new ArrayList<String>();
+		
+		for(int i = 0; i < listfeedback.size(); i++) {
+			User u = UserDAO.getUserByID(listfeedback.get(i).getUserID());
+			listusername.add(u.getUserName());
+		}
+		
+		model.addAttribute("listfeedback", listfeedback);
+		model.addAttribute("listusername", listusername);
+		return "adminfeedback";
 	}
 	
 }

@@ -8,6 +8,7 @@
 <meta charset="ISO-8859-1">
 	<title>Insert title here</title>
 	<style><%@include file="/WEB-INF/css/main.css"%></style>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 </head>
 
 <style>
@@ -57,16 +58,41 @@
 	 }
 </style>
 
+<script>
+  $.getJSON('api/software', function(results) {
+	  var table = document.getElementById('list');
+	
+	  results.forEach(async function(object, index) {
+		  var tr = document.createElement('tr');
+		  tr.innerHTML = '<td data-label="Software Name">' + object.swName + '</td>'+
+		  '<td data-label="Software Version">' + object.swVersion + '</td>' +
+		  '<td data-label="Description">' + object.swDescription + '</td>' +
+		  '<td data-label="Category">' + await loadCategoryName(object.categoryID) + '</td>' +
+		  '<td data-label="Download Link"><a href="data:application/zip;base64,'+object.swFile+'" onclick = "window.location.href = `download/'+object.swID+'`">Download link</a></td>';
+		  table.appendChild(tr);
+	  });
+  });
+  
+  async function loadCategoryName(id) {
+	  const response = await fetch('api/category/'+id, {
+		  method: 'GET'
+		});
+ 	const category = await response.json();
+	return category.categoryName;
+  }
+</script>
+
+<!--Navigation bar-->
+<div id="nav-placeholder">
+	<%@include file="header.jsp" %>
+</div>
+<input type = "hidden" id = "active" data-active = "swviewer"/>
+
 <body>
-	<div class="topnav">
-	  <a href="requestsoftware">Request Software</a>
-	  <a href="requestviewer">View Request</a>
-	  <a href="feedback">Feedback</a>
-	  <a href="index" style="color: blue;">Logout</a>
-	  <p>REPO-X</p>
-	</div>
+
+<div id = "bodycontent">
 	<h2>SOFTWARE LIST</h2>
-	<table>
+	<table id = "list">
 		<thead>
 			<tr>
 				<th scope="col">Software Name</th>
@@ -76,8 +102,9 @@
 				<th scope="col">Download Link</th>
 			</tr>
 		</thead>
-
+		
 		<tbody>
+			<!-- 
 			<c:forEach items="${softwares}" var="item" varStatus="status">
 				<tr>
 					<td data-label="Software Name">${item.swName}</td>
@@ -85,16 +112,13 @@
 					<td data-label="Description">${item.swDescription}</td>
 					<td data-label="Category">${item.categoryID}</td>
 					<td data-label="Download Link">
-					<!--  
-						<a href="data:application/image;base64,${files[status.index]}" download = "${item.swName}.png">Download link</a>
-						<a href="<%=request.getContextPath()%>/download/${item.swID}">Go</a>
-					-->
 					<a href="data:application/zip;base64,${files[status.index]}">Download link</a>
 					</td>
 				</tr>
 			</c:forEach>
-		</tbody>
-		
+			 -->
+		</tbody>	
 	</table>
+	</div>
 </body>
 </html>

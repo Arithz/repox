@@ -3,14 +3,13 @@ package com.software.DAO;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
-import org.springframework.web.multipart.MultipartResolver;
-import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
 import com.software.api.Software;
 import com.software.config.MainAppConfig;
@@ -104,5 +103,16 @@ public class SoftwareDAOImpl implements SoftwareDAO {
 			return softwares;
 		}
 	}
-
+	
+	public List<Object> getSoftwareHistory() {
+		String sql = "select user.userName, user.userCategory, software.swName, software.swVersion from software_action left join user on user.userID = software_action.userID left join software on software.swID=software_action.swID";
+				
+		List<Object> strList = jdbcTemplate.query(sql, new RowMapper<Object>() {
+			public Object mapRow(ResultSet rs, int rowNum) throws SQLException {
+				List<Object> listData = Arrays.asList(new Object[]{rs.getString(3), rs.getDouble(4), rs.getString(1), rs.getString(2)});
+				return listData;
+			}
+		});
+		return strList;
+	}
 }
