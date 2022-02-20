@@ -42,7 +42,7 @@ public class UserController {
 		User logineduser = UserDAO.loginUser(user);
 		if(logineduser != null) {
 			session.setAttribute("userID",logineduser.getUserID());
-			return "redirect:/userhomepage";
+			return "redirect:/softwareviewer";
 		}else {
 			return "redirect:/login";
 		}
