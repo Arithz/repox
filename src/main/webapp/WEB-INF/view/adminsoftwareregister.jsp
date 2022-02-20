@@ -81,7 +81,7 @@
 				</select> <a id="btncat" href="categoryregister">New Category</a>
 			</div>
 			<input id = "image-file" type = "file" name = "swFile" required/>
-			<input id="btnsubmit" type="submit" value="Sign Up" />
+			<input id="btnsubmit" type="submit" value="Add Software" />
 		</form>
       </div>
     </div>
